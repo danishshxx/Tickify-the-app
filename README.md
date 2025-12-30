@@ -1,59 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎟️ Tickify - Modern Concert Ticketing System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Tickify adalah platform pemesanan tiket konser berbasis web yang dibangun dengan **Laravel 10** dan **Tailwind CSS**. Aplikasi ini dirancang untuk memberikan pengalaman pembelian tiket yang realistis, aman, dan anti-calo.
 
-## About Laravel
+![Tickify Dashboard Banner](public/logo.png) 
+*(Ganti link di atas dengan screenshot project kamu nanti)*
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌟 Fitur Unggulan
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🛡️ Sistem Keamanan & Anti-Calo
+* **Validasi Data Diri:** Mewajibkan input NIK (16 digit), Nama Sesuai KTP, dan No. HP saat checkout.
+* **Limit Pembelian:** Algoritma cerdas membatasi maksimal **4 tiket per akun** (gabungan riwayat transaksi & order baru).
+* **Real-time Stock:** Mencegah pembelian jika stok tiket habis.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 💰 Sistem Pembayaran Realistis (Manual Gateway)
+* **Rincian Biaya Transparan:** Perhitungan otomatis Harga Tiket + PPN 11% + Biaya Layanan.
+* **Alur Pembayaran:** Checkout -> Scan QRIS -> Upload Bukti Transfer -> Verifikasi Admin.
+* **E-Ticket:** Tiket hanya terbit setelah pembayaran diverifikasi oleh Admin.
 
-## Learning Laravel
+### 👨‍💻 Admin Dashboard
+* **Kelola Konser:** Tambah event, set venue, tanggal, dan upload banner.
+* **Manajemen Tiket:** Atur kategori tiket (VIP, Festival, Tribune) dan kuota stok.
+* **Verifikasi Transaksi:** Panel khusus untuk Validasi/Reject bukti pembayaran user.
+* **Laporan:** Ringkasan total pendapatan, tiket terjual, dan venue aktif.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 🎨 UI/UX Modern
+* **Dark Mode Design:** Tampilan elegan dan nyaman di mata (ala Spotify/Netflix).
+* **Interactive Carousel:** Banner slide otomatis menggunakan **Alpine.js**.
+* **Responsive:** Tampilan optimal di Desktop dan Mobile.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Teknologi yang Digunakan
 
-## Laravel Sponsors
+* **Backend:** Laravel 10 (PHP 8.2)
+* **Frontend:** Blade Templating, Tailwind CSS
+* **Database:** MySQL
+* **Interactivity:** Alpine.js
+* **Authentication:** Laravel Breeze
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Cara Install (Localhost)
 
-### Premium Partners
+Ikuti langkah ini untuk menjalankan project di komputer kamu:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+1.  **Clone Repository**
+    ```bash
+    git clone [https://github.com/username-kamu/tickify-app.git](https://github.com/username-kamu/tickify-app.git)
+    cd tickify-app
+    ```
 
-## Contributing
+2.  **Install Dependencies**
+    ```bash
+    composer install
+    npm install && npm run build
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3.  **Setup Environment**
+    Duplikat file `.env.example` menjadi `.env`:
+    ```bash
+    cp .env.example .env
+    ```
+    Buka file `.env` dan sesuaikan setting database:
+    ```
+    DB_DATABASE=tickify_db
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
-## Code of Conduct
+4.  **Generate Key & Migrate**
+    ```bash
+    php artisan key:generate
+    php artisan migrate --seed
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5.  **Link Storage (Penting untuk Gambar)**
+    ```bash
+    php artisan storage:link
+    ```
 
-## Security Vulnerabilities
+6.  **Jalankan Server**
+    ```bash
+    php artisan serve
+    ```
+    Buka `http://127.0.0.1:8000` di browser.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📸 Screenshots
 
-## License
+| Halaman Depan | Detail Konser |
+|dev/images/home.png|dev/images/detail.png|
+| **Checkout & Validasi** | **Admin Dashboard** |
+|dev/images/checkout.png|dev/images/admin.png|
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+*(Disarankan buat folder `dev/images` lalu masukkan screenshot kamu ke sana biar README-nya ada gambarnya)*
+
+## 📝 License
+
+[MIT](https://choosealicense.com/licenses/mit/)
